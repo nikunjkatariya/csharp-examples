@@ -293,17 +293,16 @@ namespace MyFourthDayApp
                     }
                 }
 
-                book.Add(new Booking() { userid = uid, fromid = fromid - 1, toid = toid - 1});
-                foreach (Booking b in book)
+                book.Add(new Booking() { userid = uid, fromname = port[fromid].PortName,mname= port[mid].PortName, toname = port[toid].PortName });
+                foreach(Booking b in book)
                 {
-                    Console.WriteLine(" Userid: {0}\n From: {1} To: {2}\n Date: {3}\n Cost: {4}", b.userid, port[b.fromid + 1], port[b.mid + 1], port[b.toid + 1]);
+                    Console.WriteLine(" Userid: {0}\n From: {1} Hold: {2} To: {3}", b.userid, b.fromname, b.mname, b.toname);
                 }
 
-                Console.WriteLine("Want to Book Another Container");
+                Console.WriteLine("Want to Book Another Container[Y]:");
                 choice = Console.ReadLine();
-                fromid = 0;
-                toid = 0;
-                mid = 0;
+                fromflag=toflag=midflag=true;
+                fromid =toid=mid= 0;
             }
         }
 
@@ -321,9 +320,9 @@ namespace MyFourthDayApp
         public class Booking
         {
             public int userid { get; set; }
-            public int fromid { get; set; }
-            public int toid { get; set; }
-            public int mid { get; set; }
+            public string fromname { get; set; }
+            public string toname { get; set; }
+            public string mname { get; set; }
         }
     }
 }
