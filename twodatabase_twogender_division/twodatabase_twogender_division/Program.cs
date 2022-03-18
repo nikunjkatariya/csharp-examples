@@ -12,12 +12,10 @@ namespace twodatabase_twogender_division
     {
         static void Main(string[] args)
         {
-            SqlConnection sqlcon1 = new SqlConnection(@"Data Source=EFICYIT-LT12;Initial Catalog=dbone;Integrated Security=True");
-            SqlConnection sqlcon2 = new SqlConnection(@"Data Source=EFICYIT-LT12;Initial Catalog=dbtwo;Integrated Security=True");
-
             int Age = 0;
             bool status = true;
             string Name = "", Gender = "";
+            string db = "",sqltable="";
             while (status)
             {
                 Console.Clear();
@@ -29,19 +27,24 @@ namespace twodatabase_twogender_division
                 Age = Convert.ToInt32(Console.ReadLine());    
                 Console.WriteLine("Provide Gender [M|F]: ");
                 Gender = Console.ReadLine();
+               
                 if(Age<50)
                 {
                     if(Gender=="M"||Gender=="m")
                     {
-                        SqlDataAdapter sqlmins1 = new SqlDataAdapter($"INSERT INTO male (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon1);
+                        db = "dbone";
+                        sqltable = "male";
+                        /*SqlDataAdapter sqlmins1 = new SqlDataAdapter($"INSERT INTO male (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon1);
                         DataTable dtbl = new DataTable();
-                        sqlmins1.Fill(dtbl);
+                        sqlmins1.Fill(dtbl);*/
                     }
                     else if(Gender=="F"||Gender=="f")
                     {
-                        SqlDataAdapter sqlmins1 = new SqlDataAdapter($"INSERT INTO female (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon1);
+                        db = "dbone";
+                        sqltable = "female";
+                        /*SqlDataAdapter sqlmins1 = new SqlDataAdapter($"INSERT INTO female (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon1);
                         DataTable dtbl = new DataTable();
-                        sqlmins1.Fill(dtbl);
+                        sqlmins1.Fill(dtbl);*/
                     }
                     else
                     {
@@ -52,15 +55,19 @@ namespace twodatabase_twogender_division
                 {
                     if (Gender == "M" || Gender == "m")
                     {
-                        SqlDataAdapter sqlmins2 = new SqlDataAdapter($"INSERT INTO male (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon2);
+                        db = "dbtwo";
+                        sqltable = "male";
+                        /*SqlDataAdapter sqlmins2 = new SqlDataAdapter($"INSERT INTO male (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon2);
                         DataTable dtbl2 = new DataTable();
-                        sqlmins2.Fill(dtbl2);
+                        sqlmins2.Fill(dtbl2);*/
                     }
                     else if (Gender == "F" || Gender == "f")
                     {
-                        SqlDataAdapter sqlmins2 = new SqlDataAdapter($"INSERT INTO female (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon2);
+                        db = "dbtwo";
+                        sqltable = "female";
+                        /*SqlDataAdapter sqlmins2 = new SqlDataAdapter($"INSERT INTO female (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')", sqlcon2);
                         DataTable dtbl = new DataTable();
-                        sqlmins2.Fill(dtbl);
+                        sqlmins2.Fill(dtbl);*/
                     }
                     else
                     {
@@ -71,9 +78,12 @@ namespace twodatabase_twogender_division
                 {
                     Console.WriteLine("Provided Age is Not Correct!");
                 }
+                SqlConnection sqlcon = new SqlConnection($@"Data Source=EFICYIT-LT12;Initial Catalog={db};Integrated Security=True");
+                SqlDataAdapter sqlmins2 = new SqlDataAdapter(($"INSERT INTO {sqltable} (Name, Age, Gender) VALUES('{Name}',{Age},'{Gender}')"), sqlcon);
                 Console.WriteLine("Want to Add more? \nPress Number to Continue\nPress 0 for Exit.");
                 if (Convert.ToInt32(Console.ReadLine()) == 0)
                     status = false;
+
             }
         }
     }

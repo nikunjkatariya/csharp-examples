@@ -29,7 +29,7 @@ namespace MyFifthDayApp
                 Console.WriteLine("{0} {1} {2}",s.Id,s.Name,s.CollegeName);*/
 
             //EDI File Reading Operation
-            string ediX12path = @"C:\Users\raytex\source\repos\csharp-examples\MyFifthDayApp\MyFifthDayApp\EDIFiles\850_X12-3030.txt";
+            string ediX12path = @"D:\Major Project\Files Shared By Swaroop\03_ShipmentStatus.txt";
 
             IDictionary<int, string[]> ediY12 = new Dictionary<int, string[]>();
 
